@@ -1,4 +1,3 @@
-
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -107,23 +106,14 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-#
-#
-alias dev='cd ~/../../mnt/c/dev'
-alias dev='cd ~/../../mnt/c/Dev'
-alias openweb="powershell.exe /c start 'http://localhost:3000'"
-alias open="powershell.exe /c start"
-alias lat="cd ~/../../mnt/c/Latex"
-alias h="cd ~"
-export DISPLAY=:0
-export LIBGL_ALWAYS_INDIRECT=1
-sudo /etc/init.d/dbus start &> /dev/null
-
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-DISABLE_AUTO_TITLE="true"
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-export TERM=xterm-256color
 
+alias lat="cd ~/../../mnt/c/Users/leona/latex"
+alias dev="cd ~/../../mnt/c/Users/leona/dev"
+alias h="cd ~"
+alias open="xdg-open"
