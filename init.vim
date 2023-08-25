@@ -1,162 +1,111 @@
-set tabstop=4
-set shiftwidth=4
-set expandtab
+set completeopt=noinsert,menuone,noselect
+set hidden
+set inccommand=split
+set mouse=a
 set number
 set relativenumber
-set mouse=a
-set cindent
-set splitright
-set splitbelow
-set hidden
-set smartindent
-set autoindent
-set sidescrolloff=6
-set noswapfile
-set wildignore
-set clipboard=unnamedplus
+set splitbelow splitright
+set title
+set ttimeoutlen=0
+set wildmenu
 
+" Tabs size
+set expandtab
+set shiftwidth=4
+set tabstop=4
 
-let mapleader=','
-let maplocalleader="\,"
-inoremap ii <esc>
-vnoremap ii <esc>
-tnoremap <Esc> <C-\><C-n><CR>
-tnoremap ii  <C-\><C-n><CR>
+let mapleader = ","
 
-call plug#begin('~/.vim/plugged')
+inoremap 88 <ESC>
+vnoremap 88 <ESC>
+tnoremap 88 <C-\><C-n>
 
-Plug 'pangloss/vim-javascript'
-Plug 'Rigellute/rigel'
-Plug 'honza/vim-snippets'
-Plug 'matze/vim-tex-fold'
-Plug 'lervag/vimtex'
-Plug 'tpope/vim-surround' 
-Plug 'Chiel92/vim-autoformat'
-Plug 'ludovicchabant/vim-gutentags'
-Plug 'airblade/vim-gitgutter'
-Plug 'tribela/vim-transparent'
-Plug 'glepnir/dashboard-nvim'
-Plug 'maxmellon/vim-jsx-pretty'
-Plug 'bagrat/vim-buffet'
-Plug 'itchyny/lightline.vim'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
-Plug 'vim-airline/vim-airline'
-Plug 'christoomey/vim-tmux-navigator'
-Plug 'kyazdani42/nvim-web-devicons'
-Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'scrooloose/nerdcommenter'
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-Plug 'ryanoasis/vim-devicons'
-Plug 'scrooloose/nerdtree'
-Plug 'ianks/vim-tsx'
-Plug 'rakr/vim-one'
-Plug 'leafgarland/typescript-vim'
-Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'}
-let g:coc_global_extensions = ['coc-json', 'coc-html', 'coc-css', 'coc-react-refactor', 'coc-tsserver', 'coc-tailwindcss', 'coc-highlight', 'coc-prettier', 'coc-tslint', 'coc-emmet']
+call plug#begin()
+
+ Plug 'ryanoasis/vim-devicons'
+ Plug 'preservim/nerdcommenter'
+ Plug 'lervag/vimtex'
+ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+ Plug 'junegunn/fzf.vim'
+ Plug 'vim-airline/vim-airline-themes'
+ Plug 'vim-airline/vim-airline'
+ Plug 'neoclide/coc.nvim', {'branch': 'release'}
+ Plug 'jiangmiao/auto-pairs'
+ Plug 'SirVer/ultisnips'
+ Plug 'honza/vim-snippets'
+ Plug 'turbio/bracey.vim'
+ Plug 'tpope/vim-unimpaired'
 
 call plug#end()
-let g:javascript_plugin_flow = 1
 
-let $FZF_DEFAULT_COMMAND='find . \( -name node_modules -o -name .git \) -prune -o -print'
+" vimtex configuration
 
-nmap <C-b> :NERDTreeToggle<CR>
-vmap ++ <plug>NERDCommenterToggle
-nmap ++ <plug>NERDCommenterToggle
-let g:NERDTreeGitStatusWithFlags = 1
-let g:NERDTreeIgnore = ['^node_modules$']
-
-nnoremap <A-i> :LLPStartPreview<cr>
-nnoremap <C-p> :FZF<CR>
-let g:fzf_action = {
-  \ 'ctrl-t': 'tab split',
-  \ 'ctrl-s': 'split',
-  \ 'ctrl-v': 'vsplit'
-  \}
-
-let NERDTreeShowHidden=1
-
-let g:dashboard_default_executive = 'fzf'
-
-let g:dashboard_custom_header =[
-  \'                 ▄████████▄         ',
-  \'               ▄█▀▒▒▒▒▒▒▒▀██▄       ',
-  \'           ▄█▀▒▒▒▒▒▒▄▒▒▒▒▒▒▐█▌      ',
-  \'         ▄█▒▒▒▒▒▒▒▒▒▒▀█▒▒▒▄██       ',
-  \'       ▄█▒▒▒▒▒▒▒▒▒▒▒▒▒▒██▀▒▒▒█▄     ',
-  \'     ▄█▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒█▄   ',
-  \'     ▄█▒▒▒▄██████▄▒▒▒▒▄█████▄▒▒▒▒█  ',
-  \'     █▒▒▒█▀░░░░░▀█ ▒▒▒█▀░░░░▀█▒▒▒█  ',
-  \'     █▒▒▒█░░▄░░░░▀████▀░░░▄░░█▒▒▒█  ',
-  \'   ▄███▄▒█▄░▐▀▄░░░░░░░░░▄▀▌░▄█▒▒███▄',
-  \'   █▀░░█▄▒█░▐▐▀▀▄▄▄ ▄▄▄▀▀▌▌░█▒▒█░░▀█',
-  \'   █░░░░█▒█░▐▐  ▄▄ █ ▄▄  ▌▌░█▒█░░░░█',
-  \'   █░▄░░█▒█░▐▐▄ ▀▀ █ ▀▀ ▄▌▌░█▒█░░▄░█',
-  \'   █░░█░█▒█░░▌▄█▄▄▀ ▀▄▄█▄▐░░█▒█░█░░█',
-  \'   █▄░█████████▀░░▀▄▀░░▀█████████░▄█',
-  \'   ██▀░░▄▀░░▀░░▀▄░░░▄▀░░▀░░▀▄░░▀██  ',
-  \'   ██░░░░░░░░░░░░░░░░░░░░░░░░░░░░░██',
-  \'   █░▄░░░░░░░░░░░░░░░░░░░░░░░░░░░▄░█',
-  \'   █░▀█▄░░░░░░░░░░░░░░░░░░░░░░░▄█▀░█',
-  \'   █░░█▀███████████████████████▀█░░█',
-  \'   █░░█    █   █   █   █   █    █░░█',
-  \'   █░░░▀█▄▄█▄▄▄█▄▄▄█▄▄▄█▄▄▄█▄▄█▀░░░█',
-  \'   ▀█░░▀█▄█    █   █   █   █▄█▀░░░█▀  ',
-  \'    ▀█░░░▀▀█▄▄ █   █   █▄▄█▀▀░░░░█▀  ',
-  \'     ▀█░░░░░▀▀█████████▀▀░░░░░░█▀    ',
-  \'      ▀█░░░░░░░▄░░░░░░░▄░░░░░░█▀    ',
-  \'        ▀██▄░░░▀▀▀▀▀▀▀▀▀░░░▄██▀      ',
-  \'          ▀██▄▄░░░░░░░▄▄██▀        ', 
-  \'             ▀▀███████▀▀            ',
-\]
-
-set termguicolors
-colorscheme rigel
-
-" This is necessary for VimTeX to load properly. The "indent" is optional.
-" Note that most plugin managers will do this automatically.
-filetype plugin indent on
-
-" This enables Vim's and neovim's syntax-related features. Without this, some
-" VimTeX features will not work (see ":help vimtex-requirements" for more
-" info).
-syntax enable
-
-" Or with a generic interface:
-let g:vimtex_view_general_viewer = 'okular'
-let g:vimtex_view_general_options = '--unique file:@pdf\#src:@line@tex'
 let g:vimtex_view_method = 'zathura'
-" Most VimTeX mappings rely on localleader and this can be changed with the
-" following line. The default is usually fine and is the symbol "\".
-let maplocalleader = ","
-    let g:tex_flavor='latex'
-    let g:vimtex_quickfix_mode=0
+let g:vimtex_compiler_method = 'latexmk'
 
-"Completion settings
-"Use <tab> for trigger completion and navigate to the next complete item
-inoremap <silent><expr> <Tab>
-  \ pumvisible() ? "\<C-n>" :
-  \ coc#expandableOrJumpable() ?
-  \ "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-  \ <SID>check_back_space() ? "\<Tab>" :
-  \ coc#refresh()
+nnoremap <C-p> :FZF<CR>
 
-inoremap <silent><expr> <S-Tab>
-  \ pumvisible() ? "\<C-p>" :
-  \ coc#expandableOrJumpable() ?
-  \ "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-pre',''])\<CR>" :
-  \ <SID>check_back_space() ? "\<Tab>" :
-  \ coc#refresh()
+" coc configuration
 
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
+inoremap <silent><expr> <c-n>
+      \ coc#pum#visible() ? coc#pum#next(1) :
+      \ CheckBackspace() ? "\<Tab>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 
-"Select the first completion item and confirm the completion when no item has been selected:
-inoremap <silent><expr> <CR> pumvisible() ? coc#_select_confirm()
-    \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+" Use <c-space> to trigger completion
 
-let g:coc_snippet_next = '<Tab>'
-let g:coc_snippet_prev = '<S-Tab>'
+if has('nvim')
+  inoremap <silent><expr> <c-space> coc#refresh()
+else
+  inoremap <silent><expr> <c-@> coc#refresh()
+endif
 
+"confirm ultisnips
+
+let g:UltiSnipsExpandTrigger="<TAB>"
+
+" Buffers
+
+" list the buffers
+nnoremap <Leader>b :buffers<CR>:buffer<Space>
+nnoremap <Leader>l :Buffers<CR>
+
+" delete the buffer
+nnoremap <Leader>d :bd<CR>
+
+" goes to next buffet
+nnoremap <Leader>n :bn<CR>
+nnoremap <Leader>N :bN<CR>
+
+nnoremap <Leader>th  <C-w>s :term<CR>
+nnoremap <Leader>tv  <C-w>v :term<CR>
+nnoremap <Leader>t   :term<CR> <C-w>o
+
+"Move between splits
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
+" make adjusting split sizes a bit more friendly
+nnoremap <silent> <C-Left> :vertical resize +3<CR>
+nnoremap <silent> <C-Right> :vertical resize -3<CR>
+nnoremap <silent> <C-Up> :resize +3<CR>
+nnoremap <silent> <C-Down> :resize -3<CR>
+
+" make split easier
+nnoremap <Leader>v <C-w>v
+nnoremap <Leader>h <C-w>s
+
+" make the split full page
+nnoremap <Leader>o <C-w>o
+
+" change 2 split windows from vert to horiz and viceversa
+nnoremap <Leader>rh <C-w>t<C-w>H
+nnoremap <Leader>rk <C-w>t<C-w>K
+
+" vim airline configuration
+
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_theme='sol'
