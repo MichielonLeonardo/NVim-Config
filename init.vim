@@ -1,5 +1,5 @@
 set completeopt=noinsert,menuone,noselect
-set hidden
+set nohidden
 set inccommand=split
 set mouse=a
 set number
@@ -8,6 +8,7 @@ set splitbelow splitright
 set title
 set ttimeoutlen=0
 set wildmenu
+set clipboard+=unnamedplus
 
 " Tabs size
 set expandtab
@@ -35,6 +36,10 @@ call plug#begin()
  Plug 'honza/vim-snippets'
  Plug 'turbio/bracey.vim'
  Plug 'tpope/vim-unimpaired'
+ Plug 'xiyaowong/transparent.nvim'
+ Plug 'savq/melange-nvim'
+ Plug 'chrismccord/bclose.vim'
+ Plug 'xuhdev/vim-latex-live-preview', { 'for': 'tex' }
 
 call plug#end()
 
@@ -42,6 +47,8 @@ call plug#end()
 
 let g:vimtex_view_method = 'zathura'
 let g:vimtex_compiler_method = 'latexmk'
+
+nnoremap <leader>ll :VimtexCompile<CR>
 
 nnoremap <C-p> :FZF<CR>
 
@@ -65,6 +72,7 @@ endif
 
 let g:UltiSnipsExpandTrigger="<TAB>"
 
+
 " Buffers
 
 " list the buffers
@@ -73,6 +81,7 @@ nnoremap <Leader>l :Buffers<CR>
 
 " delete the buffer
 nnoremap <Leader>d :bd<CR>
+nnoremap <Leader>c :Bclose<CR>
 
 " goes to next buffet
 nnoremap <Leader>n :bn<CR>
@@ -105,7 +114,17 @@ nnoremap <Leader>o <C-w>o
 nnoremap <Leader>rh <C-w>t<C-w>H
 nnoremap <Leader>rk <C-w>t<C-w>K
 
+" Tabs config
+
+nnoremap <Leader>ò :tabnew<CR>
+nnoremap <Leader>à :tabnext<CR>
+nnoremap <Leader>0 :tabc<CR>
+
 " vim airline configuration
 
 let g:airline#extensions#tabline#enabled = 1
-let g:airline_theme='sol'
+let g:airline_theme='google_dark'
+
+set termguicolors
+colorscheme melange
+
