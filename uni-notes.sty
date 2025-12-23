@@ -1,0 +1,95 @@
+% il file va caricato in texmf/tex/latex/local (/uni-notes.sty )
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{uni-notes}
+
+\RequirePackage[most]{tcolorbox}
+\RequirePackage{amssymb}
+\RequirePackage{etoolbox} % Necessario per i controlli sui titoli vuoti
+\RequirePackage{dsfont}
+\RequirePackage{hyperref}
+\RequirePackage{cleveref}
+\newcommand{\ind}{\mathds{1}} % Crea l'1 tipico della funzione indicatrice
+
+% --- CONFIGURAZIONE BOX MINIMAL ---
+\tcbset{
+  minimal/.style={
+    enhanced,
+    breakable,
+    colback=white,
+    colframe=black!80,
+    arc=0mm,
+    boxrule=0.1mm,
+    leftrule=0.6mm,
+    fonttitle=\bfseries\color{black},
+    colbacktitle=white,
+    attach title to upper,
+    % Rimosso 'after title' da qui per gestirlo negli ambienti singoli
+    separator line=0mm,
+    top=2mm,
+    bottom=2mm,
+    left=2mm,
+    right=2mm,
+    before skip=8pt,
+    after skip=8pt
+  }
+}
+
+% --- AMBIENTI CON TITOLO SEPARATO ---
+% La logica è: Scrivi "Definizione", se c'è un argomento [#1] scrivilo tra parentesi, poi metti i due punti.
+
+\newtcolorbox{definition}[1][]{
+  minimal, 
+  title={Definizione}, 
+  after title={\ifstrempty{#1}{}{: (#1)}\textbf{:\ }}
+}
+
+\newtcolorbox{theorem}[1][]{
+  minimal, 
+  title={Teorema}, 
+  after title={\ifstrempty{#1}{}{: (#1)}\textbf{:\ }}
+}
+
+
+\newtcolorbox{corollary}[1][]{
+  minimal, 
+  title={Corollario}, 
+  after title={\ifstrempty{#1}{}{: (#1)}\textbf{:\ }}
+}
+
+\newtcolorbox{proposition}[1][]{
+  minimal, 
+  title={Proposizione}, 
+  after title={\ifstrempty{#1}{}{: (#1)}\textbf{:\ }}
+}
+
+\newtcolorbox{lemma}[1][]{
+  minimal, 
+  title={Lemma}, 
+  after title={\ifstrempty{#1}{}{: (#1)}\textbf{:\ }}
+}
+
+\newtcolorbox{example}[1][]{
+  minimal, 
+  title={Esempio}, 
+  after title={\ifstrempty{#1}{}{: (#1)}\textbf{:\ }}
+}
+
+\newtcolorbox{myproof}[1][]{
+  minimal, 
+  title={Dimostrazione}, 
+  after title={:\ }, % Le dimostrazioni di solito non hanno titolo opzionale
+  leftrule=0.1mm, 
+  fonttitle=\itshape
+}
+
+% --- COMANDI PER INSIEMI NUMERICI ---
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\K}{\mathbb{K}}
+
+\endinput
+
