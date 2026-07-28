@@ -1,0 +1,15 @@
+snippet study "Nota di Studio Strutturata" b
+*** STUDY ${1:Argomento della lezione} :${2:materia}:
+    SCHEDULED: ${3:<`date +%Y-%m-%d\ %a` +1d>} DEADLINE: ${4:<`date +%Y-%m-%d\ %a` +1w>}
+    :PROPERTIES:
+    :EFFORT: ${5:1h}
+    :END:
+
+    ** Punti chiave
+    - ${6:}
+
+    ** Note 
+    - ${7:} 
+
+$0
+endsnippet

@@ -1,0 +1,240 @@
+# ----------------------------------------------------------------             
+# SNIPPETS PER MANIM MATH (Gilles Castel Style)
+# ----------------------------------------------------------------
+
+global !p
+import re
+
+def math():
+    # Rileva se siamo dentro un costruttore Manim (MathTex, Tex, ecc.)
+    # Funziona con stringhe normali " " e raw strings r" "
+    line = vim.current.line
+    pos = vim.current.window.cursor[1]
+    before = line[:pos]
+    
+    # Cerca l'apertura di un blocco Manim
+    if re.search(r'(MathTex|Tex|Title|Label|Text|Annotation|Write|BulletList|Variable)\(\s*r?["\']', before):
+        # Se le virgolette sono dispari, la stringa è ancora aperta
+        return before.count('"') % 2 != 0 or before.count("'") % 2 != 0
+    return False
+
+def env(name):
+    # In Manim gli ambienti LaTeX sono stringhe, non abbiamo il supporto VimTeX
+    # Restituisce False per evitare errori, ma puoi implementare check se serve
+    return False
+endglobal
+
+# --- SIMBOLI E OPERATORI (Solo in Math Mode) ---
+
+context "math()"
+snippet => "implies" Ai
+\\implies
+endsnippet
+
+context "math()"
+snippet =< "implied by" Ai
+\\impliedby
+endsnippet
+
+context "math()"
+snippet iff "iff" Ai
+\\iff
+endsnippet
+
+context "math()"
+snippet // "Fraction" iA
+\\frac{$1}{$2}$0
+endsnippet
+
+context "math()"
+snippet / "Fraction" i
+\\frac{${VISUAL}}{$1}$0
+endsnippet
+
+# Frazione automatica (es: 1/ -> \frac{1}{})
+context "math()"
+snippet '((\d+)|(\d*)(\\)?([A-Za-z]+)((\^|_)(\{\d+\}|\d))*)/' "symbol frac" wrA
+\\frac{`!p snip.rv = match.group(1)`}{$1}$0
+endsnippet
+
+# Pedici e Apici automatici
+context "math()"
+snippet '([A-Za-z])(\d)' "auto subscript" wrA
+`!p snip.rv = match.group(1)`_`!p snip.rv = match.group(2)`
+endsnippet
+
+context "math()"
+snippet '([A-Za-z])_(\d\d)' "auto subscript2" wrA
+`!p snip.rv = match.group(1)`_{`!p snip.rv = match.group(2)`}
+endsnippet
+
+context "math()"
+snippet sr "^2" iA
+^2
+endsnippet
+
+context "math()"
+snippet cb "^3" iA
+^3
+endsnippet
+
+context "math()"
+snippet td "to the power" iA
+^{$1}$0
+endsnippet
+
+# --- LETTERE GRECHE (Velocità Massima) ---
+
+context "math()"
+snippet ;a "alpha" iA
+\\alpha
+endsnippet
+
+context "math()"
+snippet ;b "beta" iA
+\\beta
+endsnippet
+
+context "math()"
+snippet ;g "gamma" iA
+\\gamma
+endsnippet
+
+context "math()"
+snippet ;d "delta" iA
+\\delta
+endsnippet
+
+context "math()"
+snippet ;e "epsilon" iA
+\\epsilon
+endsnippet
+
+context "math()"
+snippet ;z "zeta" iA
+\\zeta
+endsnippet
+
+context "math()"
+snippet ;t "theta" iA
+\\theta
+endsnippet
+
+context "math()"
+snippet ;l "lambda" iA
+\\lambda
+endsnippet
+
+context "math()"
+snippet ;m "mu" iA
+\\mu
+endsnippet
+
+context "math()"
+snippet ;p "pi" iA
+\\pi
+endsnippet
+
+context "math()"
+snippet ;r "rho" iA
+\\rho
+endsnippet
+
+context "math()"
+snippet ;s "sigma" iA
+\\sigma
+endsnippet
+
+context "math()"
+snippet ;o "omega" iA
+\\omega
+endsnippet
+
+context "math()"
+snippet ;f "phi" iA
+\\phi
+endsnippet
+
+context "math()"
+snippet ;D "Delta" iA
+\\Delta
+endsnippet
+
+context "math()"
+snippet ;G "Gamma" iA
+\\Gamma
+endsnippet
+
+context "math()"
+snippet ;O "Omega" iA
+\\Omega
+endsnippet
+
+# --- PARENTESI E MATRICI ---
+
+context "math()"
+snippet () "left( right)" iA
+\\left( ${1:${VISUAL}} \\right) $0
+endsnippet
+
+context "math()"
+snippet pmat "pmat" iA
+\\begin{pmatrix} $1 \\end{pmatrix} $0
+endsnippet
+
+context "math()"
+snippet bmat "bmat" iA
+\\begin{bmatrix} $1 \\end{bmatrix} $0
+endsnippet
+
+# --- ANALISI E PROBABILITÀ ---
+
+context "math()"
+snippet sum "sum" w
+\\sum_{${1:n}=${2:1}}^{${3:\\infty}} ${4:a_$1} $0
+endsnippet
+
+context "math()"
+snippet lim "limit" w
+\\lim_{${1:n} \\to ${2:\\infty}} 
+endsnippet
+
+context "math()"
+snippet dint "integral" wA
+\\int_{${1:-\\infty}}^{${2:\\infty}} ${3:${VISUAL}} $0
+endsnippet
+
+context "math()"
+snippet sq "\sqrt{}" iA
+\\sqrt{${1:${VISUAL}}} $0
+endsnippet
+
+context "math()"
+snippet RR "real" iA
+\\mathbb{R}
+endsnippet
+
+context "math()"
+snippet NN "natural" iA
+\\mathbb{N}
+endsnippet
+
+context "math()"
+snippet EE "exists" iA
+\\exists 
+endsnippet
+
+context "math()"
+snippet AA "forall" iA
+\\forall 
+endsnippet
+
+context "math()"
+snippet inn "in" iA
+\\in 
+endsnippet
+
+context "math()"
+snippet mcal "mathcal" iA
+\\mathcal{$1}$0
+endsnippet

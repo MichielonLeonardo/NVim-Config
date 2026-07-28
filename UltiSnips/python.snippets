@@ -1,0 +1,144 @@
+extends manim_math
+
+global !p
+import re
+
+# Funzione per rilevare se siamo in una zona "LaTeX" di Manim
+def is_manim_math():
+    line = vim.current.line
+    pos = vim.current.window.cursor[1]
+    before = line[:pos]
+    if re.search(r'(MathTex|Tex|Title|Label|Text|Annotation|Write|BulletList|Variable)\(\s*r?["\']', before):
+        return before.count('"') % 2 != 0 or before.count("'") % 2 != 0
+    return False
+
+# Override della funzione math() per gli snippet ereditati
+def math():
+    return is_manim_math()
+endglobal
+
+# --- TEMPLATE ---
+snippet minit "Manim 3Blue1Brown Template" b
+from manim import *
+
+# --- PALETTE 3BLUE1BROWN ---
+# Colori iconici di Grant Sanderson
+C_BLUE   = "#58C4DD"
+C_GREEN  = "#83C167"
+C_YELLOW = "#FFFF00"
+C_RED    = "#FF0000"
+C_GREY   = "#BBBBBB"
+
+# --- CONFIGURAZIONE ---
+config.background_color = "#111111"  # Grigio molto scuro (più morbido del nero)
+config.frame_rate = 30               # 30fps per preview veloci (usa 60 per il final)
+# config.pixel_height = 720          # Opzionale: abbassa la risoluzione in dev
+
+class ${1:MyScene}(Scene):
+    def construct(self):
+        # Oggetti di esempio per testare il template
+        text = MathTex(r"e^{i\pi} + 1 = 0").set_color(C_BLUE)
+        
+        self.play(Write(text))
+        self.wait(1)
+        ${0}
+endsnippet
+
+
+# --- STRUTTURA SCENA ---
+
+snippet mscene "Manim Scene Boilerplate" b
+class ${1:MyScene}(Scene):
+    def construct(self):
+        ${0:pass}
+endsnippet
+
+snippet msetup "Setup Method" b
+def setup(self):
+    ${1:pass}
+endsnippet
+
+# --- OGGETTI COMUNI (3B1B Style) ---
+
+snippet mt "MathTex" w
+MathTex(r"${1:${VISUAL}}")
+endsnippet
+
+snippet mtext "Text" w
+Text("${1:${VISUAL}}")
+endsnippet
+
+snippet mvg "VGroup" w
+VGroup(${1:${VISUAL}})$0
+endsnippet
+
+snippet maxes "Axes" b
+axes = Axes(
+    x_range=[${1:-10, 10, 1}],
+    y_range=[${2:-10, 10, 1}],
+    axis_config={"color": BLUE},
+)
+endsnippet
+
+# --- ANIMAZIONI ---
+
+snippet pl "self.play" b
+self.play(${1:Animation}(${2:mobj}))
+endsnippet
+
+snippet plw "self.play Write" b
+self.play(Write(${1:mobj}))
+endsnippet
+
+snippet plc "self.play Create" b
+self.play(Create(${1:mobj}))
+endsnippet
+
+snippet plf "self.play FadeIn" b
+self.play(FadeIn(${1:mobj}))
+endsnippet
+
+snippet plt "self.play Transform" b
+self.play(ReplacementTransform(${1:source}, ${2:target}))
+endsnippet
+
+snippet mw "self.wait" b
+self.wait(${1:1})
+endsnippet
+
+# --- POSIZIONAMENTO ---
+
+snippet nt "Next To" w
+next_to(${1:obj}, ${2:DOWN}, buff=${3:0.5})
+endsnippet
+
+snippet sc "Shift & Color" w
+set_color(${1:BLUE}).shift(${2:UP})
+endsnippet
+
+# --- FIGURE GEOMETRICHE ---
+
+snippet mcirc "Circle" w
+Circle(radius=${1:1.0}, color=${2:C_BLUE})
+endsnippet
+
+snippet msq "Square" w
+Square(side_length=${1:2.0}, color=${2:C_WHITE})
+endsnippet
+
+snippet mrect "Rectangle" w
+Rectangle(width=${1:4.0}, height=${2:2.0}, color=${3:C_WHITE})
+endsnippet
+
+snippet mtri "Triangle" w
+Triangle(color=${1:C_GREEN})
+endsnippet
+
+snippet mdot "Dot" w
+Dot(point=${1:ORIGIN}, color=${2:C_YELLOW})
+endsnippet
+
+snippet mline "Line" w
+Line(start=${1:LEFT}, end=${2:RIGHT}, color=${3:C_GREY})
+endsnippet
+

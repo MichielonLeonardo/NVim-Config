@@ -1,0 +1,55 @@
+priority 10000
+
+snippet thm "Teorema" b
+\begin{thm}[${1:titolo}] \label{thm:${1/(\w+)|(\W+)/(?1:\L$0:)(?2:_)/ga}}
+	$0
+\end{thm}
+endsnippet
+
+snippet def "Definizione" b
+\begin{defn}[${1:titolo}] \label{def:${1/(\w+)|(\W+)/(?1:\L$0:)(?2:_)/ga}}
+	$0
+\end{defn}
+endsnippet
+
+snippet prop "Proposizione" b
+\begin{prop}[${1:titolo}] \label{prop:${1/(\w+)|(\W+)/(?1:\L$0:)(?2:_)/ga}}
+	$0
+\end{prop}
+endsnippet
+
+snippet lemma "Lemma" b
+\begin{lem}[${1:titolo}] \label{lem:${1/(\w+)|(\W+)/(?1:\L$0:)(?2:_)/ga}}
+	$0
+\end{lem}
+endsnippet
+
+snippet corol "Corollario" b
+\begin{cor}[${1:titolo}] \label{cor:${1/(\w+)|(\W+)/(?1:\L$0:)(?2:_)/ga}}
+	$0
+\end{cor}
+endsnippet
+
+snippet ex "Esempio" b
+\begin{esem}[${1:titolo}] \label{esem:${1/(\w+)|(\W+)/(?1:\L$0:)(?2:_)/ga}}
+	$0
+\end{esem}
+endsnippet
+
+snippet nota "Nota" b
+\begin{nota}[${1:titolo}] \label{nota:${1/(\w+)|(\W+)/(?1:\L$0:)(?2:_)/ga}}
+	$0
+\end{nota}
+endsnippet
+
+snippet proof "Dimostrazione" b
+\begin{proof}
+	$0
+\end{proof}
+endsnippet
+
+snippet mproof "Dimostrazione" b
+\begin{proof}
+	$0
+\end{proof}
+endsnippet
